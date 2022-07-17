@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --write ."
+    "dev": "nodemon src/index.js",
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint --fix \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "keywords": [
     "node",
@@ -17,7 +18,10 @@
   "author": "disto-stack",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^7.6.2",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
+    "sequelize": "^6.21.3",
     "sqlite3": "^5.0.9"
   },
   "devDependencies": {
