@@ -35,17 +35,20 @@ const createTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
 
   try {
-    const updatedTask = await Task.update(...req.body, { where: { id } });
+    await Task.update({ ...req.body }, { where: { id } });
     return res.status(200).json({
       ok: true,
-      updatedTask,
+      message: 'Task updated',
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       ok: false,
       message: 'Error updating task',
+      error,
     });
   }
 };
