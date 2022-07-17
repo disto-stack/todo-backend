@@ -7,7 +7,7 @@ const Task = sequelize.define('task', {
     allowNull: false,
   },
   description: DataTypes.TEXT,
-  creator: DataTypes.TEXT,
+  author: DataTypes.TEXT,
   state: DataTypes.ENUM('pending', 'completed'),
 });
 

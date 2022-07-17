@@ -1,0 +1,75 @@
+const Task = require('../models/Task');
+
+const getTasks = async (req, res) => {
+  const tasks = await Task.findAll();
+
+  if (!tasks) {
+    return res.status(500).json({
+      ok: false,
+    });
+  }
+
+  return res.status(200).json({
+    ok: true,
+    tasks,
+  });
+};
+
+const createTask = async (req, res) => {
+  try {
+    await Task.create({
+      ...req.body,
+    });
+
+    return res.status(200).json({
+      ok: true,
+      message: 'Task created',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      message: 'Error creating task',
+    });
+  }
+};
+
+const updateTask = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const updatedTask = await Task.update(...req.body, { where: { id } });
+    return res.status(200).json({
+      ok: true,
+      updatedTask,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      message: 'Error updating task',
+    });
+  }
+};
+
+const deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Task.destroy({ where: { id } });
+    return res.status(204).json({
+      ok: true,
+      message: 'Task deleted',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      message: 'Error deleting task',
+    });
+  }
+};
+
+module.exports = {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+};
