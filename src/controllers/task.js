@@ -19,6 +19,29 @@ const getTasks = async (req, res) => {
 };
 
 /**
+ * Función para obtener una tarea, dado el is
+ */
+const getTaskById = async (req, res) => {
+  const { id } = req.params;
+
+  const task = await Task.findOne({
+    where: { id },
+  });
+
+  if (!task) {
+    return res.status(404).json({
+      ok: false,
+      message: 'task not found',
+    });
+  }
+
+  return res.status(200).json({
+    ok: true,
+    task,
+  });
+};
+
+/**
  * Función para crear una nueva tarea en la base de datos
  */
 const createTask = async (req, res) => {
@@ -44,7 +67,6 @@ const createTask = async (req, res) => {
  */
 const updateTask = async (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
 
   try {
     await Task.update({ ...req.body }, { where: { id } });
@@ -84,6 +106,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   getTasks,
+  getTaskById,
   createTask,
   updateTask,
   deleteTask,

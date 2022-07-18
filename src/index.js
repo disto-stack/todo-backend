@@ -19,6 +19,7 @@ const {
   createTask,
   updateTask,
   deleteTask,
+  getTaskById,
 } = require('./controllers/task');
 
 // Middlewares para configurar cors y parsear correctamente el body de la request
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas o endpoints de la api
 app.get('/api/task', getTasks);
+app.get('/api/task/:id', getTaskById);
 app.post('/api/task', createTask);
 app.put('/api/task/:id', updateTask);
 app.delete('/api/task/:id', deleteTask);
