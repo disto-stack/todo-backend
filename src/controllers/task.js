@@ -1,5 +1,8 @@
 const Task = require('../models/Task');
 
+/**
+ * Función para obtener todas las tareas guardadas en la base de datos
+ */
 const getTasks = async (req, res) => {
   const tasks = await Task.findAll();
 
@@ -15,6 +18,9 @@ const getTasks = async (req, res) => {
   });
 };
 
+/**
+ * Función para crear una nueva tarea en la base de datos
+ */
 const createTask = async (req, res) => {
   try {
     await Task.create({
@@ -33,6 +39,9 @@ const createTask = async (req, res) => {
   }
 };
 
+/**
+ * Función para actualizar una tarea con cierto id, en la base de datos
+ */
 const updateTask = async (req, res) => {
   const { id } = req.params;
   console.log(req.body);
@@ -53,6 +62,9 @@ const updateTask = async (req, res) => {
   }
 };
 
+/**
+ * Función para eliminar una tarea con cierto id, en la base de datos
+ */
 const deleteTask = async (req, res) => {
   const { id } = req.params;
 
